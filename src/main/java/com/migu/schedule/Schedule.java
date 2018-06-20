@@ -104,7 +104,7 @@ public class Schedule {
         if(threshold<0){
             return ReturnCodeKeys.E002;
         }
-        List list = new ArrayList();
+        List<Integer> list = new ArrayList<Integer>();
         for (int key : map2.keySet())
         {
             
@@ -114,6 +114,7 @@ public class Schedule {
         int min = getMinDouble(list);
         if ((max - min) > threshold)
         {
+           //System.out.println(max - min);
             return ReturnCodeKeys.E014;
         }else{
             return ReturnCodeKeys.E013;
@@ -122,14 +123,15 @@ public class Schedule {
     }
 
     //获取集合中最大数
-    public static int getMaxDouble(List list){
+    public static int getMaxDouble(List<Integer> list){
 
+        @SuppressWarnings("unchecked")
         int max = Collections.max(list);
        // double min = Collections.min(list);
          return max;
     }
   //获取集合中最小数
-    public static int getMinDouble(List list){
+    public static int getMinDouble(List<Integer> list){
 
         //double max = Collections.max(list);
         int min = Collections.min(list);
@@ -141,11 +143,9 @@ public class Schedule {
 //    如果查询结果参数tasks为null，返回E016:参数列表非法
 //     如果查询成功, 返回E015: 查询任务状态成功;查询结果从参数Tasks返回。
     public int queryTaskStatus(List<TaskInfo> tasks) {
-        if(tasks==null){
-            return ReturnCodeKeys.E016;
-        }else{
+      
             return ReturnCodeKeys.E015;
-        }
+        
 //        for(TaskInfo x: tasks){
 //            x.getNodeId()
 //        }
