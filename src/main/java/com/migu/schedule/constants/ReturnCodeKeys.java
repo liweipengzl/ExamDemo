@@ -13,6 +13,8 @@ public final class ReturnCodeKeys {
     public static final int E010 = 10;
     public static final int E011 = 11;
     public static final int E012 = 12;
+    public static final int E0122 = 122;
+    public static final int E0123 = 123;
     public static final int E013 = 13;
     public static final int E014 = 14;
     public static final int E015 = 15;
