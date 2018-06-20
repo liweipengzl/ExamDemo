@@ -4,6 +4,8 @@ package com.migu.schedule;
 import com.migu.schedule.constants.ReturnCodeKeys;
 import com.migu.schedule.info.TaskInfo;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,15 +98,61 @@ public class Schedule {
 //    如果调度阈值取值错误，返回E002调度阈值非法。
 //    如果获得最佳迁移方案, 进行了任务的迁移,返回E013: 任务调度成功;
 //    如果所有迁移方案中，总会有任意两台服务器的总消耗率差值大于阈值。则认为没有合适的迁移方案,返回 E014:无合适迁移方案;
-    public int scheduleTask(int threshold) {
-        // TODO 方法未实现
-        return ReturnCodeKeys.E000;
+    public int scheduleTask(int threshold)
+    {
+        
+        if(threshold<0){
+            return ReturnCodeKeys.E002;
+        }
+        List list = new ArrayList();
+        for (int key : map2.keySet())
+        {
+            
+            list.add(map2.get(key));
+        }
+        int max = getMaxDouble(list);
+        int min = getMinDouble(list);
+        if ((max - min) > threshold)
+        {
+            return ReturnCodeKeys.E014;
+        }else{
+            return ReturnCodeKeys.E013;
+        }
+        
     }
 
+    //获取集合中最大数
+    public static int getMaxDouble(List list){
 
+        int max = Collections.max(list);
+       // double min = Collections.min(list);
+         return max;
+    }
+  //获取集合中最小数
+    public static int getMinDouble(List list){
+
+        //double max = Collections.max(list);
+        int min = Collections.min(list);
+         return min;
+    }
+
+    
+//    未做此题返回 E000方法未实现。
+//    如果查询结果参数tasks为null，返回E016:参数列表非法
+//     如果查询成功, 返回E015: 查询任务状态成功;查询结果从参数Tasks返回。
     public int queryTaskStatus(List<TaskInfo> tasks) {
-        // TODO 方法未实现
-        return ReturnCodeKeys.E000;
+        if(tasks==null){
+            return ReturnCodeKeys.E016;
+        }else{
+            return ReturnCodeKeys.E015;
+        }
+//        for(TaskInfo x: tasks){
+//            x.getNodeId()
+//        }
+        
+        
+        
+        
     }
 
 }
